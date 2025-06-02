@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.tei-c.org/ns/1.0"
+           xmlns="http://www.tei-c.org/ns/1.0"
+           elementFormDefault="qualified">
+
+  <xs:element name="TEI">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="teiHeader" type="teiHeaderType"/>
+        <xs:element name="text" type="textType"/>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- teiHeader Section -->
+  <xs:complexType name="teiHeaderType">
+    <xs:sequence>
+      <xs:element name="fileDesc" type="fileDescType"/>
+      <xs:element name="profileDesc" type="profileDescType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="fileDescType">
+    <xs:sequence>
+      <xs:element name="titleStmt" type="titleStmtType"/>
+      <xs:element name="publicationStmt" type="publicationStmtType"/>
+      <xs:element name="sourceDesc" type="sourceDescType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="titleStmtType">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="author" type="authorType" minOccurs="0"/>
+      <xs:element name="respStmt" type="respStmtType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="authorType">
+    <xs:sequence>
+      <xs:element name="persName" type="xs:string" minOccurs="0"/>
+      <xs:element name="orgName" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="respStmtType">
+    <xs:sequence>
+      <xs:element name="resp" type="xs:string"/>
+      <xs:element name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="publicationStmtType">
+    <xs:sequence>
+      <xs:element name="publisher" type="xs:string" minOccurs="0"/>
+      <xs:element name="pubPlace" type="xs:string" minOccurs="0"/>
+      <xs:element name="date" type="xs:string"/>
+      <xs:element name="biblScope" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sourceDescType">
+    <xs:sequence>
+      <xs:element name="p" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Metadata description -->
+  <xs:complexType name="profileDescType">
+    <xs:sequence>
+      <xs:element name="textClass" type="textClassType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="textClassType">
+    <xs:sequence>
+      <xs:element name="keywords" type="keywordsType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="keywordsType">
+    <xs:sequence>
+      <xs:element name="term" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Body/Text -->
+  <xs:complexType name="textType">
+    <xs:sequence>
+      <xs:element name="body" type="bodyType"/>
+      <xs:element name="back" type="backType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="bodyType">
+    <xs:sequence>
+      <xs:element name="fw" type="fwType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="div" type="divType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="fwType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="xs:string"/>
+        <xs:attribute name="place" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="divType">
+    <xs:sequence>
+      <xs:element name="head" type="xs:string" minOccurs="0"/>
+      <xs:element name="p" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="list" type="listType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="quote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="hi" type="hiType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="div" type="divType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="note" type="noteType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string" use="optional"/>
+    <xs:attribute name="n" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="hiType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="rend" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="listType">
+    <xs:sequence>
+      <xs:element name="item" type="itemType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="itemType">
+    <xs:sequence>
+      <xs:element name="p" type="xs:string" minOccurs="0"/>
+      <xs:element name="list" type="listType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="n" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="noteType">
+    <xs:sequence>
+      <xs:element name="p" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="backType">
+    <xs:sequence>
+      <xs:element name="p" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="table" type="tableType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tableType">
+    <xs:sequence>
+      <xs:element name="row" type="rowType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="rowType">
+    <xs:sequence>
+      <xs:element name="cell" type="cellType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cellType">
+    <xs:sequence>
+      <xs:element name="p" type="xs:string" minOccurs="0"/>
+      <xs:element name="list" type="listType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
