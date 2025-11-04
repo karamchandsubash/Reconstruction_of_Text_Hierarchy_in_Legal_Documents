@@ -1,0 +1,15 @@
+{
+  "images_dir": "/home/labthomas/images",
+  "results_json": "/home/labthomas/results.json",
+  "output_dir": "/home/labthomas/auto_output",
+  "labelstudio_preds_dir": "/home/labthomas/auto_output/labelstudio_preds",
+  "tei_dir": "/home/labthomas/auto_output/tei",
+  "dataset_csv": "/home/labthomas/auto_output/dataset.csv",
+  "image_exts": [
+    ".jpg",
+    ".png"
+  ],
+  "dpi": 300,
+  "lang": "deu",
+  "max_length": 512
+}
